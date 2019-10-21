@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "258422629368",
+    "firebase_url": "https://carinsurance-81a0b.firebaseio.com",
+    "project_id": "carinsurance-81a0b",
+    "storage_bucket": "carinsurance-81a0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258422629368:android:7e936047b3d54a2114ac0d",
+        "android_client_info": {
+          "package_name": "com.example.carinsurance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258422629368-g6fo2vj60tj2os3ddper1gu0ba4i6tom.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carinsurance",
+            "certificate_hash": "4c4403887077077ee67af777f5dd57eada2b7949"
+          }
+        },
+        {
+          "client_id": "258422629368-iqoumucdjd37qfql8otqld8pmrtrejvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4Lyhj28dFD_cGDnglf677ewSvXcTLW4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258422629368-iqoumucdjd37qfql8otqld8pmrtrejvq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
