@@ -41,7 +41,7 @@ public class NewCarActivity extends AppCompatActivity {
         authID_str=authID.getText().toString();
 
         //GOTO:Update to database if authID is correct
-        if(authID_str.length()!=0){
+        if(authID_str.equals("hey")){
             finish();
         }
     }
