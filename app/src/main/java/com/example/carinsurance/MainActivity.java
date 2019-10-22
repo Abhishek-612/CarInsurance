@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity
                 new AuthUI.IdpConfig.PhoneBuilder().build());
 
 
-        firebaseAuthenticate();
+        if(FirebaseAuth.getInstance().getCurrentUser() == null)
+            firebaseAuthenticate();
 
 
 
@@ -80,6 +81,24 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+
+    void loadFragment(int frag){
+        switch (frag){
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+
+
+
         }
     }
 
