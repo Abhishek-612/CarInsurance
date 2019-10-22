@@ -7,11 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.carinsurance.Models.Car;
+
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
-    private ArrayList<DataModel> dataSet;
+    private ArrayList<Car> dataSet;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -27,7 +29,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         }
     }
 
-    public CustomAdapter(ArrayList<DataModel> data) {
+    public CustomAdapter(ArrayList<Car> data) {
         this.dataSet = data;
     }
 
@@ -52,10 +54,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView chassis=holder.chassis;
 
         model.setText(dataSet.get(listPosition).getModel());
-        number.setText(dataSet.get(listPosition).getNumber());
+        number.setText(dataSet.get(listPosition).getVehicleNum());
         engine.setText(dataSet.get(listPosition).getEngine());
         chassis.setText(dataSet.get(listPosition).getChassis());
-
 
     }
 

@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.carinsurance.Models.Car;
+
 import java.util.ArrayList;
 
 
@@ -29,7 +32,7 @@ public class CarsFragment extends Fragment {
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private static ArrayList<DataModel> data;
+    private static ArrayList<Car> data;
     static View.OnClickListener myOnClickListener;
 
     public CarsFragment() {
@@ -73,9 +76,9 @@ public class CarsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        data = new ArrayList<DataModel>();
+        data = new ArrayList<Car>();
 
-        data.add(new DataModel("Maruti Swift","MH02CV7175","NEYF32SVN","H3GIS8BEU"));
+        data.add(new Car("Maruti Swift","MH02CV7175","NEYF32SVN","H3GIS8BEU","whatevs",0));
 
         adapter = new CustomAdapter(data);
         recyclerView.setAdapter(adapter);
@@ -98,8 +101,11 @@ public class CarsFragment extends Fragment {
             TextView model
                     = (TextView) viewHolder.itemView.findViewById(R.id.carName);
             String selectedName = (String) model.getText();
-            Toast.makeText(context, selectedName, Toast.LENGTH_SHORT).show();
-
+//            Toast.makeText(context, selectedName, Toast.LENGTH_SHORT).show();
+            BottomFragment addBottomDialogFragment =
+                    BottomFragment.newInstance();
+            addBottomDialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(),
+                    "add_dialog_fragment");
         }
 
 
