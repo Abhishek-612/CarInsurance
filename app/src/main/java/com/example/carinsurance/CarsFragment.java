@@ -78,7 +78,7 @@ public class CarsFragment extends Fragment {
 
         data = new ArrayList<Car>();
 
-        data.add(new Car("Maruti Swift","MH02CV7175","NEYF32SVN","H3GIS8BEU","whatevs",0));
+        data.add(new Car("Maruti Swift","MH02CV7175","NEYF32SVN","H3GIS8BEU"));
 
         adapter = new CustomAdapter(data);
         recyclerView.setAdapter(adapter);

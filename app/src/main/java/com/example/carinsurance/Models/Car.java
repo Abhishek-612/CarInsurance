@@ -20,6 +20,13 @@ public class Car {
         this.claims = claims;
     }
 
+    public Car(String model, String vehicleNum, String engine, String chassis) {
+        this.model = model;
+        this.vehicleNum = vehicleNum;
+        this.engine = engine;
+        this.chassis = chassis;
+    }
+
     public String getModel() {
         return model;
     }

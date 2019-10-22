@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.carinsurance.Models.Insurance;
+
 import java.util.ArrayList;
 
 public class CustomPremiumAdapter extends RecyclerView.Adapter<CustomPremiumAdapter.MyViewHolder> {
 
-    private ArrayList<PremiumDataModel> dataSet;
+    private ArrayList<Insurance> dataSet;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -30,7 +32,7 @@ public class CustomPremiumAdapter extends RecyclerView.Adapter<CustomPremiumAdap
         }
     }
 
-    public CustomPremiumAdapter(ArrayList<PremiumDataModel> data) {
+    public CustomPremiumAdapter(ArrayList<Insurance> data) {
         this.dataSet = data;
     }
 
@@ -57,9 +59,9 @@ public class CustomPremiumAdapter extends RecyclerView.Adapter<CustomPremiumAdap
         Button pay=holder.pay;
 
 
-        model.setText(dataSet.get(listPosition).getModel());
-        premium.setText(dataSet.get(listPosition).getPremium());
-        doi.setText(dataSet.get(listPosition).getDoi());
+        model.setText(dataSet.get(listPosition).getVehicleNum());
+        premium.setText("₹ "+Double.toString(dataSet.get(listPosition).getPremium()));
+        doi.setText(dataSet.get(listPosition).getBoughtAt());
 
         pay.setOnClickListener(new View.OnClickListener() {
             @Override

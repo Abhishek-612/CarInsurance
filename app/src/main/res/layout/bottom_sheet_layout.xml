@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/dp_8"
     android:layout_marginTop="@dimen/dp_8"
+    android:paddingTop="@dimen/dp_16"
     android:orientation="vertical">
 
     <TextView
@@ -44,12 +45,27 @@
         android:textSize="16sp" />
 
 
+    <TextView
+        android:id="@+id/veh_no"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginStart="@dimen/dp_16"
+        android:backgroundTint="@android:color/white"
+        android:drawablePadding="@dimen/dp_32"
+        android:gravity="start|center_vertical"
+        android:text="Vehicle No."
+        android:textSize="16sp" />
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="@dimen/dp_8"
+        android:layout_marginHorizontal="15dp"
         android:layout_marginTop="@dimen/md_bottom_sheet_separator_top_margin"
         android:background="#6D6D6D" />
+
 
     <TextView
         android:id="@+id/eng_no"
@@ -81,6 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="@dimen/dp_8"
+        android:layout_marginHorizontal="15dp"
         android:layout_marginTop="@dimen/md_bottom_sheet_separator_top_margin"
         android:background="#6D6D6D" />
 
@@ -112,6 +129,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"
         android:text="Check Insurance"
+        android:id="@+id/check"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/colorAccent"/>
 

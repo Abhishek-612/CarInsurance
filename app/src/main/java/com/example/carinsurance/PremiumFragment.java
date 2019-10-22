@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.carinsurance.Models.Insurance;
+
 import java.util.ArrayList;
 
 
@@ -25,7 +27,7 @@ public class PremiumFragment extends Fragment {
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private static ArrayList<PremiumDataModel> data;
+    private static ArrayList<Insurance> data;
     static View.OnClickListener myPremiumOnClickListener;
 
     public PremiumFragment() {
@@ -58,9 +60,9 @@ public class PremiumFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        data = new ArrayList<PremiumDataModel>();
+        data = new ArrayList<Insurance>();
 
-        data.add(new PremiumDataModel("Maruti Swift","INR 20000","12/02/89"));
+        data.add(new Insurance("Maruti Swift",20000,"12/02/89"));
 
         adapter = new CustomPremiumAdapter(data);
         recyclerView.setAdapter(adapter);
