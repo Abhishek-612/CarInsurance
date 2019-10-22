@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity
                 new AuthUI.IdpConfig.PhoneBuilder().build());
 
 
-        if(FirebaseAuth.getInstance().getCurrentUser() == null)
-            firebaseAuthenticate();
+        if(!getSharedPreferences("user",MODE_PRIVATE).contains("username")){
+            startActivity(new Intent(this,LoginActivity.class));
+        }
 
 
 
