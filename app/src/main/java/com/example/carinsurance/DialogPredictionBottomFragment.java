@@ -1,5 +1,7 @@
 package com.example.carinsurance;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -78,7 +80,20 @@ public class DialogPredictionBottomFragment extends BottomSheetDialogFragment {
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), CarsFragment.vehicleNum, Toast.LENGTH_SHORT).show();
+                dismiss();
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Claim requested")
+                        .setMessage("Your claim is being processed. Please wait till the company responds to your request")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ((AppCompatActivity)getContext()).getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.fragment_container, new CarsFragment())
+                                        .commit();
+                            }
+                        })
+                        .show();
             }
         });
     }

@@ -10,7 +10,7 @@
 
     <string name="menu_my_cars">My Cars</string>
     <string name="menu_premium">Pay Premium</string>
-    <string name="menu_profile">My Profile</string>
+    <string name="menu_profile">My Transactions</string>
     <string name="menu_logout">Log out</string>
 
     <!-- TODO: Remove or change this placeholder text -->

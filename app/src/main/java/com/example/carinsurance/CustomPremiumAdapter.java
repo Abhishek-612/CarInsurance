@@ -61,7 +61,7 @@ public class CustomPremiumAdapter extends RecyclerView.Adapter<CustomPremiumAdap
         Button pay=holder.pay;
 
 
-        model.setText(dataSet.get(listPosition).getVehicleNum());
+        model.setText(CarsFragment.vehicleNum);
         premium.setText("₹ "+Double.toString(dataSet.get(listPosition).getPremium()));
         doi.setText(dataSet.get(listPosition).getBoughtAt());
 

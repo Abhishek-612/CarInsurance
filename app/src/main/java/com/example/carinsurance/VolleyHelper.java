@@ -17,7 +17,8 @@ import java.util.HashMap;
 
 public class VolleyHelper {
 
-    private static final String baseUrl = "http://192.168.43.47:8000/";
+//    private static final String baseUrl = "http://192.168.43.47:8000/";
+    private static final String baseUrl = "http://192.168.29.193:8000/";
     public static final String predictionsUrl = baseUrl+"androidApi/getPredictions/";
     Context c;
 

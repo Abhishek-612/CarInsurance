@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity
 
 
         if(!getSharedPreferences("user",MODE_PRIVATE).contains("username")){
-            startActivity(new Intent(this,LoginActivity.class));
+//            startActivity(new Intent(this,LoginActivity.class));
         }
 
 
@@ -73,6 +74,10 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        String name_str=getSharedPreferences("user",MODE_PRIVATE).getString("name","DEFAULT");
+        String username_str=getSharedPreferences("user",MODE_PRIVATE).getString("username","DEFAULT");
+        name.setText(name_str);
+        mail.setText(username_str);
     }
 
     @Override
@@ -112,6 +117,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             fragment=new CarsFragment();
+        } else if (id == R.id.nav_premium) {
+            fragment=new PremiumFragment();
         } else if (id == R.id.nav_premium) {
             fragment=new PremiumFragment();
         } else if (id == R.id.nav_logout) {
