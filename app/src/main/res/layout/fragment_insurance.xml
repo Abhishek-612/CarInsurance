@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="40dp"
-    android:layout_marginLeft="15dp"
     tools:context=".InsuranceFragment">
 
 
@@ -70,6 +69,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="bottom"
+        android:layout_marginLeft="@dimen/dp_24"
         android:layout_marginBottom="48dp">
 
         <TextView
@@ -96,6 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:id="@+id/raise_claim"
         android:text="Raise Claim"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/colorAccent"

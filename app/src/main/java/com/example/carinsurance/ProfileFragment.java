@@ -27,7 +27,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_cars, container, false);
+        rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         return rootView;
     }
 

@@ -1,5 +1,12 @@
 package com.example.carinsurance.Models;
 
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+
+import com.example.carinsurance.InsuranceFragment;
+import com.example.carinsurance.PredictionFragment;
+import com.example.carinsurance.R;
+
 public class Insurance {
 
     String vehicleNum;
@@ -7,7 +14,7 @@ public class Insurance {
     String boughtAt;
     double claim;
 
-    public Insurance(String vehicleNum, double premium, String boughtAt, double claim) {
+    public Insurance() {
         this.vehicleNum = vehicleNum;
         this.premium = premium;
         this.boughtAt = boughtAt;
@@ -38,16 +45,19 @@ public class Insurance {
 
 
     //TODO: Add functions
-    private void pay(){
+    public void pay(){
 
     }
 
-    private void updatePremium(){
+    public void updatePremium(){
 
     }
 
-    private void raiseClaim(){
-
+    public void raiseClaim(AppCompatActivity context){
+            context.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new PredictionFragment())
+                .commit();
     }
 
 }
