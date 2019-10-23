@@ -1,6 +1,9 @@
 package com.example.carinsurance.Models;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Car {
 
     String model;
@@ -25,6 +28,18 @@ public class Car {
         this.vehicleNum = vehicleNum;
         this.engine = engine;
         this.chassis = chassis;
+    }
+
+    public static Car fromJson(JSONObject o) {
+        try {
+            Car c = new Car(o.getString("model"),o.getString("vehicleNum"),
+                    o.getString("model"),o.getString("vehicleNum"),
+                    o.getString("purchasedAt"),o.getInt("claims"));
+            return c;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String getModel() {

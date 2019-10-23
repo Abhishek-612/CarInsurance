@@ -106,7 +106,6 @@ public class PredictionFragment extends Fragment {
                             }
                             else
                                 Log.d("response error",error);
-
                         }
                     });
                 }

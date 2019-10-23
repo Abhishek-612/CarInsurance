@@ -1,29 +1,30 @@
 package com.example.carinsurance;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.carinsurance.Models.Car;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class CarsFragment extends Fragment {
@@ -32,7 +33,7 @@ public class CarsFragment extends Fragment {
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private static ArrayList<Car> data;
+    private static ArrayList<Car> carsArray;
     static View.OnClickListener myOnClickListener;
 
     public CarsFragment() {
@@ -57,6 +58,7 @@ public class CarsFragment extends Fragment {
     }
 
     void viewSetter(){
+        getCars();
         FloatingActionButton fab = rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,11 +78,11 @@ public class CarsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        data = new ArrayList<Car>();
+        carsArray = new ArrayList<Car>();
 
-        data.add(new Car("Maruti Swift","MH02CV7175","NEYF32SVN","H3GIS8BEU"));
+        carsArray.add(new Car("Maruti Swift","MH02CV7175","NEYF32SVN","H3GIS8BEU"));
 
-        adapter = new CustomAdapter(data);
+        adapter = new CustomAdapter(carsArray);
         recyclerView.setAdapter(adapter);
 
     }
@@ -107,6 +109,35 @@ public class CarsFragment extends Fragment {
             addBottomDialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(),
                     "add_dialog_fragment");
         }
+
+
+    }
+
+    void getCars(){
+        final ProgressDialog dialog = ProgressDialog.show(getContext(),"Loading carsArray","Please wait while we load your carsArray",false);
+        dialog.setCancelable(false);
+        String userName = getActivity().getSharedPreferences("user",Context.MODE_PRIVATE).getString("username","kds");
+        VolleyHelper helper = new VolleyHelper(getContext());
+        HashMap<String,Object> data = new HashMap<>();
+        data.put("customer",userName);
+        helper.callApi("androidApi/getCars", data, new VolleyHelper.VolleyCallBack() {
+            @Override
+            public void data(JSONObject data, String error) {
+                dialog.dismiss();
+                if(data != null){
+                    try {
+                        JSONArray array = new JSONArray(data.getString("result"));
+                        carsArray.clear();
+                        for(int i =0;i<array.length();i++){
+                            carsArray.add(Car.fromJson(array.getJSONObject(i)));
+                        }
+                        adapter.notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
 
     }

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class CustomPremiumAdapter extends RecyclerView.Adapter<CustomPremiumAdapter.MyViewHolder> {
 
     private ArrayList<Insurance> dataSet;
+    private View.OnClickListener listener;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -32,8 +33,9 @@ public class CustomPremiumAdapter extends RecyclerView.Adapter<CustomPremiumAdap
         }
     }
 
-    public CustomPremiumAdapter(ArrayList<Insurance> data) {
+    public CustomPremiumAdapter(ArrayList<Insurance> data,View.OnClickListener listener) {
         this.dataSet = data;
+        this.listener = listener;
     }
 
     @Override
@@ -63,13 +65,7 @@ public class CustomPremiumAdapter extends RecyclerView.Adapter<CustomPremiumAdap
         premium.setText("₹ "+Double.toString(dataSet.get(listPosition).getPremium()));
         doi.setText(dataSet.get(listPosition).getBoughtAt());
 
-        pay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your helper class", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        pay.setOnClickListener(listener);
 
 
     }

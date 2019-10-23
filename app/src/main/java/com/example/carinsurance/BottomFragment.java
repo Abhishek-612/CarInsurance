@@ -27,8 +27,7 @@ public class BottomFragment extends BottomSheetDialogFragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.bottom_sheet_layout, container,
-                false);
+        View view = inflater.inflate(R.layout.bottom_sheet_layout, container, false);
 
         // get the views and attach the listener
 
