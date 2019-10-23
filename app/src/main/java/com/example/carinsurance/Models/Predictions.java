@@ -35,6 +35,6 @@ public class Predictions {
     }
 
     public void uploadImage(Uri imageUri){
-
+        //TODO: predict()
     }
 }

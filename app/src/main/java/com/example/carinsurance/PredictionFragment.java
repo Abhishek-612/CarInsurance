@@ -1,7 +1,10 @@
 package com.example.carinsurance;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.gesture.Prediction;
 import android.graphics.Bitmap;
@@ -13,11 +16,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.carinsurance.Models.Predictions;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -71,10 +76,41 @@ public class PredictionFragment extends Fragment {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(resultUri!=null)
+                if(resultUri!=null){
                     new Predictions().uploadImage(resultUri);
+                    final ProgressDialog progressdialog = ProgressDialog.show(
+                            getContext(), "Please wait",
+                            "Loading please wait..", true);
+                    progressdialog.setCancelable(true);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // TODO Auto-generated method stub
+                            try {
+                                Thread.sleep(5000);
+                            } catch (Exception e) {
+                            }
+                            progressdialog.dismiss();
+                        }
+                    }).start();
+
+                    final AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+
+                            .setTitle(Html.fromHtml("<font color='#0068BF'>Prediction Analysis</font>"))
+
+
+                            .setPositiveButton("Request Claim", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            }).create();
+                    alertDialog.show();
+                }
+
+
                 else
-                    Snackbar.make(view, "Error uploading image. Please try again", Snackbar.LENGTH_LONG)
+                    Snackbar.make(view, "Error uploading image. Please try again", Snackbar.LENGTH_SHORT)
                             .setAction("Try again", null).show();
             }
         });
