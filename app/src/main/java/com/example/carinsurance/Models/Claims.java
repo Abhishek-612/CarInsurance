@@ -1,20 +1,30 @@
 package com.example.carinsurance.Models;
 
+import org.json.JSONObject;
+
 public class Claims {
 
     boolean verfiedAt;
-    String raisedAt,settledAt;
+    String raisedAt,settledAt,location,severity;
     double price;
 
-    public Claims(boolean verfiedAt, String raisedAt, String settledAt, double price) {
+    public Claims(){
+
+    }
+
+    public Claims(boolean verfiedAt, String raisedAt, String settledAt, String location, String severity, double price) {
         this.verfiedAt = verfiedAt;
         this.raisedAt = raisedAt;
         this.settledAt = settledAt;
+        this.location = location;
+        this.severity = severity;
         this.price = price;
     }
 
-    public Claims(String raisedAt, double price) {
+    public Claims(String raisedAt, String location, String severity, double price) {
         this.raisedAt = raisedAt;
+        this.location = location;
+        this.severity = severity;
         this.price = price;
     }
 
@@ -34,6 +44,14 @@ public class Claims {
         return price;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public String getSeverity() {
+        return severity;
+    }
+
     private void settleClaim(){
 
     }
@@ -41,4 +59,18 @@ public class Claims {
     private void addCost(){
 
     }
+
+    public static Claims getJSON(String  data){
+        Claims c = new Claims();
+        try {
+            JSONObject j = new JSONObject(data);
+            String region = j.getString("maxResult");
+            c.price = j.getInt("cost");
+            c.location = region.split("_")[0];
+            c.severity = region.split("_")[1];
+        }catch (Exception e){}
+
+        return c;
+    }
+
 }

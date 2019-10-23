@@ -114,8 +114,6 @@ public class MainActivity extends AppCompatActivity
             fragment=new CarsFragment();
         } else if (id == R.id.nav_premium) {
             fragment=new PremiumFragment();
-        } else if (id == R.id.nav_profile) {
-
         } else if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();

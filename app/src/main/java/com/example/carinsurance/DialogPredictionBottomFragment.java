@@ -13,14 +13,17 @@ import android.widget.TextView;
 
 import com.example.carinsurance.Models.Claims;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 public class DialogPredictionBottomFragment extends BottomSheetDialogFragment {
 
 
-    TextView cost,date;
+    TextView cost,date,severity,location;
     Button request;
     View rootView;
+    JSONObject data;
 
     public static DialogPredictionBottomFragment newInstance() {
         return new DialogPredictionBottomFragment();
@@ -35,6 +38,11 @@ public class DialogPredictionBottomFragment extends BottomSheetDialogFragment {
         rootView = inflater.inflate(R.layout.dialog_prediction, container,
                 false);
 
+        try {
+            data = new JSONObject(getArguments().getString("data"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         // get the views and attach the listener
 
         return rootView;
@@ -47,12 +55,21 @@ public class DialogPredictionBottomFragment extends BottomSheetDialogFragment {
 
         cost=(TextView)rootView.findViewById(R.id.cost);
         date=(TextView)rootView.findViewById(R.id.dateBottom);
+        location=(TextView)rootView.findViewById(R.id.location);
+        severity=(TextView)rootView.findViewById(R.id.sever);
         request=(Button)rootView.findViewById(R.id.raise);
 
-        Claims claims=new Claims("9/8/99",5000);
+        Claims claims= null;
+        try {
+            claims = Claims.getJSON(data.getString("max"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         date.setText(claims.getRaisedAt());
         cost.setText("₹ "+claims.getPrice());
+        location.setText(claims.getLocation());
+        severity.setText(claims.getSeverity());
 
         request.setOnClickListener(new View.OnClickListener() {
             @Override

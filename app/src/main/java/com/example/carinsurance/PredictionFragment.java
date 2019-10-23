@@ -120,8 +120,11 @@ public class PredictionFragment extends Fragment {
     }
 
     private void handleResponse(JSONObject data) {
+        Bundle b = new Bundle();
+        b.putString("data",data.toString());
         DialogPredictionBottomFragment dialogPredictionBottomFragment =
                 DialogPredictionBottomFragment.newInstance();
+        dialogPredictionBottomFragment.setArguments(b);
         dialogPredictionBottomFragment.show(((AppCompatActivity)getContext()).getSupportFragmentManager(),
                 "add_second_dialog_fragment");
     }
@@ -133,6 +136,7 @@ public class PredictionFragment extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
                 resultUri = result.getUri();
                 image.setImageURI(resultUri);
+                upload.setVisibility(View.VISIBLE);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
