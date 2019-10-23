@@ -1,7 +1,9 @@
 package com.example.carinsurance;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.gesture.Prediction;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,15 +19,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.carinsurance.Models.Predictions;
 import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageActivity;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 
 public class PredictionFragment extends Fragment {
 
     View rootView;
-    Button capture;
+    Button capture,upload;
     ImageView image;
+    Uri resultUri=null;
     private static final int REQUEST_IMAGE_CAPTURE=101;
 
     public PredictionFragment() {
@@ -50,23 +55,27 @@ public class PredictionFragment extends Fragment {
 
     void viewSetter(){
         capture=(Button)rootView.findViewById(R.id.capture);
+        upload=(Button)rootView.findViewById(R.id.upload);
         image=(ImageView)rootView.findViewById(R.id.image);
 
         capture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//
-//                CropImage.activity()
-//                        .setGuidelines(CropImageView.Guidelines.ON)
-//                        .start(getContext(),PredictionFragmentthis);
-//
-//// start cropping activity for pre-acquired image saved on the device
-//                CropImage.activity(imageUri)
-//                        .start(this);
-//
-//// for fragment (DO NOT use `getActivity()`)
-//                CropImage.activity()
-//                        .start(getContext(), this);
+                CropImage.activity().setAspectRatio(1,1).setGuidelines(CropImageView.Guidelines.ON).start(getContext(),PredictionFragment.this);
+
+
+            }
+        });
+
+
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(resultUri!=null)
+                    new Predictions().uploadImage(resultUri);
+                else
+                    Snackbar.make(view, "Error uploading image. Please try again", Snackbar.LENGTH_LONG)
+                            .setAction("Try again", null).show();
             }
         });
     }
@@ -74,9 +83,14 @@ public class PredictionFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUEST_IMAGE_CAPTURE && resultCode==-1){
-            Bitmap bitmap=(Bitmap)data.getExtras().get("data");
-            image.setImageBitmap(bitmap);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == Activity.RESULT_OK) {
+                resultUri = result.getUri();
+                image.setImageURI(resultUri);
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
         }
 
     }

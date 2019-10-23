@@ -1,5 +1,7 @@
 package com.example.carinsurance.Models;
 
+import android.net.Uri;
+
 public class Predictions {
 
     String predictedOn;
@@ -10,6 +12,10 @@ public class Predictions {
         this.predictedOn = predictedOn;
         this.predictedPrice = predictedPrice;
         this.actualPrice = actualPrice;
+    }
+
+    public Predictions() {
+
     }
 
     public String getPredictedOn() {
@@ -28,7 +34,7 @@ public class Predictions {
 
     }
 
-    public void uploadImage(){
+    public void uploadImage(Uri imageUri){
 
     }
 }
