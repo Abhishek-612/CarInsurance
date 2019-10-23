@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.carinsurance.Models.Claims;
 
@@ -61,7 +62,7 @@ public class DialogPredictionBottomFragment extends BottomSheetDialogFragment {
 
         Claims claims= null;
         try {
-            claims = Claims.getJSON(data.getString("max"));
+            claims = Claims.getJSON(data.getString("predictions"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -69,12 +70,15 @@ public class DialogPredictionBottomFragment extends BottomSheetDialogFragment {
         date.setText(claims.getRaisedAt());
         cost.setText("₹ "+claims.getPrice());
         location.setText(claims.getLocation());
-        severity.setText(claims.getSeverity());
+        if(claims.getLocation().equals("whole"))
+            severity.setVisibility(View.GONE);
+        else
+            severity.setText(claims.getSeverity());
 
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Toast.makeText(getContext(), CarsFragment.vehicleNum, Toast.LENGTH_SHORT).show();
             }
         });
     }

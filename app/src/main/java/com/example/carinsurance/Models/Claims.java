@@ -64,6 +64,7 @@ public class Claims {
         Claims c = new Claims();
         try {
             JSONObject j = new JSONObject(data);
+            j = new JSONObject(j.getString("max"));
             String region = j.getString("maxResult");
             c.price = j.getInt("cost");
             c.location = region.split("_")[0];

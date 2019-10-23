@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        procced = findViewById(R.id.procced);
+        procced = findViewById(R.id.proceed);
         procced.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

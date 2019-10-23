@@ -46,7 +46,8 @@ import java.util.HashMap;
 public class PredictionFragment extends Fragment {
 
     View rootView;
-    Button capture,upload;
+    FloatingActionButton upload;
+    Button capture;
     ImageView image;
     Uri resultUri=null;
     private static final int REQUEST_IMAGE_CAPTURE=101;
@@ -73,9 +74,9 @@ public class PredictionFragment extends Fragment {
 
     void viewSetter(){
         capture=(Button)rootView.findViewById(R.id.capture);
-        upload=(Button)rootView.findViewById(R.id.upload);
+        upload=(FloatingActionButton) rootView.findViewById(R.id.upload);
         image=(ImageView)rootView.findViewById(R.id.image);
-
+        upload.setAlpha(0f);
         capture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,8 +126,7 @@ public class PredictionFragment extends Fragment {
         DialogPredictionBottomFragment dialogPredictionBottomFragment =
                 DialogPredictionBottomFragment.newInstance();
         dialogPredictionBottomFragment.setArguments(b);
-        dialogPredictionBottomFragment.show(((AppCompatActivity)getContext()).getSupportFragmentManager(),
-                "add_second_dialog_fragment");
+        dialogPredictionBottomFragment.show(((AppCompatActivity)getActivity()).getSupportFragmentManager(),"asa");
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -136,7 +136,7 @@ public class PredictionFragment extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
                 resultUri = result.getUri();
                 image.setImageURI(resultUri);
-                upload.setVisibility(View.VISIBLE);
+                upload.setAlpha(1f);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }

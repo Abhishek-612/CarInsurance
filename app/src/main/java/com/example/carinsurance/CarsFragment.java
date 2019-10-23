@@ -34,6 +34,7 @@ public class CarsFragment extends Fragment {
     private static RecyclerView recyclerView;
     private static ArrayList<Car> data;
     static View.OnClickListener myOnClickListener;
+    public static String vehicleNum;
 
     public CarsFragment() {
         // Required empty public constructor
@@ -99,8 +100,8 @@ public class CarsFragment extends Fragment {
             RecyclerView.ViewHolder viewHolder
                     = recyclerView.findViewHolderForPosition(selectedItemPosition);
             TextView model
-                    = (TextView) viewHolder.itemView.findViewById(R.id.carName);
-            String selectedName = (String) model.getText();
+                    = (TextView) viewHolder.itemView.findViewById(R.id.numberPlate);
+            vehicleNum = (String) model.getText();
 //            Toast.makeText(context, selectedName, Toast.LENGTH_SHORT).show();
             BottomFragment addBottomDialogFragment =
                     BottomFragment.newInstance();
