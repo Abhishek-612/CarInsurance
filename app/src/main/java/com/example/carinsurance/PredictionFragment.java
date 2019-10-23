@@ -18,7 +18,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +33,14 @@ import com.example.carinsurance.Models.Predictions;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageActivity;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 
 public class PredictionFragment extends Fragment {
@@ -79,27 +90,25 @@ public class PredictionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(resultUri!=null){
-                    new Predictions().uploadImage(resultUri);
+                    Predictions pred = new Predictions();
+                    pred.uploadImage(resultUri);
                     final ProgressDialog progressdialog = ProgressDialog.show(
                             getContext(), "Please wait",
                             "Loading please wait..", true);
-                    progressdialog.setCancelable(true);
-                    new Thread(new Runnable() {
+                    progressdialog.setCancelable(false);
+                    pred.predict(getContext(), new HashMap<String, String>(), new VolleyHelper.VolleyCallBack() {
                         @Override
-                        public void run() {
-                            // TODO Auto-generated method stub
-                            try {
-                                Thread.sleep(5000);
-                            } catch (Exception e) {
-                            }
+                        public void data(JSONObject data, String error) {
                             progressdialog.dismiss();
-                        }
-                    }).start();
+                            if(data!=null){
+                                Log.d("response",data.toString());
+                                handleResponse(data);
+                            }
+                            else
+                                Log.d("response error",error);
 
-                    DialogPredictionBottomFragment dialogPredictionBottomFragment =
-                            DialogPredictionBottomFragment.newInstance();
-                    dialogPredictionBottomFragment.show(((AppCompatActivity)getContext()).getSupportFragmentManager(),
-                            "add_second_dialog_fragment");
+                        }
+                    });
                 }
 
 
@@ -110,6 +119,12 @@ public class PredictionFragment extends Fragment {
         });
     }
 
+    private void handleResponse(JSONObject data) {
+        DialogPredictionBottomFragment dialogPredictionBottomFragment =
+                DialogPredictionBottomFragment.newInstance();
+        dialogPredictionBottomFragment.show(((AppCompatActivity)getContext()).getSupportFragmentManager(),
+                "add_second_dialog_fragment");
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -118,7 +133,6 @@ public class PredictionFragment extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
                 resultUri = result.getUri();
                 image.setImageURI(resultUri);
-                upload.setVisibility(View.VISIBLE);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
