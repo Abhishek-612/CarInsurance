@@ -27,6 +27,7 @@
         android:background="#46CA00"
         android:text="Upload"
         android:textSize="20dp"
+        android:visibility="invisible"
         android:id="@+id/upload"
         android:layout_marginBottom="@dimen/dp_32"
         android:textColor="#ffffff"/>

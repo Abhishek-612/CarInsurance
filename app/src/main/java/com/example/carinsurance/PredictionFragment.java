@@ -2,6 +2,7 @@ package com.example.carinsurance;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,18 +96,10 @@ public class PredictionFragment extends Fragment {
                         }
                     }).start();
 
-                    final AlertDialog alertDialog = new AlertDialog.Builder(getContext())
-
-                            .setTitle(Html.fromHtml("<font color='#0068BF'>Prediction Analysis</font>"))
-
-
-                            .setPositiveButton("Request Claim", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                }
-                            }).create();
-                    alertDialog.show();
+                    DialogPredictionBottomFragment dialogPredictionBottomFragment =
+                            DialogPredictionBottomFragment.newInstance();
+                    dialogPredictionBottomFragment.show(((AppCompatActivity)getContext()).getSupportFragmentManager(),
+                            "add_second_dialog_fragment");
                 }
 
 
@@ -124,6 +118,7 @@ public class PredictionFragment extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
                 resultUri = result.getUri();
                 image.setImageURI(resultUri);
+                upload.setVisibility(View.VISIBLE);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }

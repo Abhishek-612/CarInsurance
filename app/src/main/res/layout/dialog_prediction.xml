@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="20dp">
+
+
+
+    <TextView
+        android:id="@+id/bottom_sheet_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_56"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginStart="@dimen/dp_16"
+        android:gravity="center"
+        android:text="Prediction Analysis"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="26sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginStart="@dimen/dp_16"
+        android:backgroundTint="@android:color/white"
+        android:paddingTop="@dimen/dp_16"
+        android:gravity="start|center_vertical"
+        android:text="Date: "
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/dateBottom"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:backgroundTint="@android:color/white"
+        android:gravity="start|center_vertical"
+        android:text="Date: "
+        android:textSize="20sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="@dimen/dp_24"
+        android:background="#6D6D6D" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_8">
+
+        <TextView
+            android:layout_width="189dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:backgroundTint="@android:color/white"
+            android:gravity="start|center_vertical"
+            android:text="Cost: "
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp" />
+
+
+        <TextView
+            android:id="@+id/cost"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginRight="@dimen/dp_16"
+            android:backgroundTint="@android:color/white"
+            android:gravity="end|center_vertical"
+            android:text="cost"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+        <Button
+            android:id="@+id/raise"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/dp_24"
+            android:background="@color/colorPrimaryDark"
+            android:text="Request Claim"
+            android:textColor="@color/colorAccent" />
+
+
+
+</LinearLayout>
