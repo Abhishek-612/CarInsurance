@@ -2,7 +2,7 @@
 
 
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/card_view"
+        android:id="@+id/card_view_1"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,24 +28,24 @@
                 >
 
                 <TextView
-                    android:id="@+id/carName"
+                    android:id="@+id/status_trans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_marginLeft="25dp"
-                    android:text="Android Name"
+                    android:text="Premium amount"
                     android:textSize="28sp"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
-                    android:id="@+id/numberPlate"
+                    android:id="@+id/car_trans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_marginTop="3dp"
                     android:layout_marginLeft="25dp"
                     android:textSize="20sp"
-                    android:text="Android Version"
+                    android:text="Model name"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             </LinearLayout>
@@ -54,7 +54,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="15dp"
                 android:layout_weight="2"
                 android:orientation="vertical"
@@ -66,39 +66,40 @@
                     android:layout_gravity="start"
                     android:layout_marginLeft="25dp"
                     android:textSize="20sp"
-                    android:text="Engine No."
+                    android:text="Transaction ID"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
-                    android:id="@+id/engineNum"
+                    android:id="@+id/premium_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_marginLeft="25dp"
-                    android:textSize="15sp"
-                    android:text="ENo"
+                    android:textSize="18sp"
+                    android:text="date"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_marginLeft="25dp"
-                    android:layout_marginTop="9dp"
                     android:textSize="20sp"
-                    android:text="Chassis No."
+                    android:text="Date of Issue"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
-                    android:id="@+id/chassisNum"
+                    android:id="@+id/date_trans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:layout_marginTop="2dp"
                     android:layout_marginLeft="25dp"
-                    android:textSize="15sp"
-                    android:text="CNo"
+                    android:textSize="18sp"
+                    android:text="date"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+
 
             </LinearLayout>
         </LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_8"
+    android:layout_marginTop="@dimen/dp_8"
+    android:paddingTop="@dimen/dp_8"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_56"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="Enter the verification code:"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="26sp"
+        android:layout_marginLeft="@dimen/dp_16" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Verification code"
+        android:id="@+id/authID"
+        android:focusable="false"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="*Code will be received via email from the company"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:textSize="10sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="italic"
+        android:layout_below="@id/authID"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:text="Verify"
+        android:id="@+id/verify"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorAccent"/>
+
+
+</LinearLayout>

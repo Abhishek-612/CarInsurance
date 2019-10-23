@@ -2,11 +2,12 @@ package com.example.carinsurance;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.carinsurance.Models.Car;
+import com.example.carinsurance.Models.Transactions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,27 +29,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class CarsFragment extends Fragment {
+public class TransactionFragment extends Fragment {
 
     View rootView;
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private static ArrayList<Car> carsArray;
+    private static ArrayList<Transactions> transactions;
     static View.OnClickListener myOnClickListener;
-    public static String vehicleNum;
 
-    public CarsFragment() {
+    public TransactionFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_cars, container, false);
+        rootView = inflater.inflate(R.layout.fragment_transaction, container, false);
         return rootView;
     }
 
@@ -55,68 +55,32 @@ public class CarsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewSetter();
-
     }
 
-    void viewSetter(){
-        getCars();
-        FloatingActionButton fab = rootView.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((AppCompatActivity)getContext()).getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, new NewCarFragment())
-                        .commit();
-            }
-        });
+    void viewSetter() {
+        getTransactions();
 
-        myOnClickListener = new MyOnClickListener(getContext());
-
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.transaction_recycler_view);
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(getContext());
+        ((LinearLayoutManager) layoutManager).setReverseLayout(true);
+        ((LinearLayoutManager) layoutManager).setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        carsArray = new ArrayList<Car>();
+        transactions = new ArrayList<Transactions>();
 
-        carsArray.add(new Car("Maruti Swift","MH02CV7175","NEYF32SVN","H3GIS8BEU"));
+        transactions.add(new Transactions("Maruti Swift","MH02CV7175","NEYF32SVN",1));
+        transactions.add(new Transactions("Maruti Swift","MH02CV7175","NEYF32SVN",2));
 
-        adapter = new CustomAdapter(carsArray);
+        adapter = new CustomTransactionsAdapter(transactions);
         recyclerView.setAdapter(adapter);
-
     }
 
-    private static class MyOnClickListener implements View.OnClickListener {
 
-        private final Context context;
-
-        private MyOnClickListener(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public void onClick(View v) {
-            int selectedItemPosition = recyclerView.getChildPosition(v);
-            RecyclerView.ViewHolder viewHolder
-                    = recyclerView.findViewHolderForPosition(selectedItemPosition);
-            TextView model
-                    = (TextView) viewHolder.itemView.findViewById(R.id.numberPlate);
-            vehicleNum = (String) model.getText();
-//            Toast.makeText(context, selectedName, Toast.LENGTH_SHORT).show();
-            BottomFragment addBottomDialogFragment =
-                    BottomFragment.newInstance();
-            addBottomDialogFragment.show(((AppCompatActivity)context).getSupportFragmentManager(),
-                    "add_dialog_fragment");
-        }
-
-
-    }
-
-    void getCars(){
-        final ProgressDialog dialog = ProgressDialog.show(getContext(),"Loading all cars","Please wait while we load your cars",false);
+    void getTransactions(){
+        final ProgressDialog dialog = ProgressDialog.show(getContext(),"Fetching transactions","Please wait while we load your previous transactions",false);
         dialog.setCancelable(false);
         String userName = getActivity().getSharedPreferences("user",Context.MODE_PRIVATE).getString("username","kds");
         VolleyHelper helper = new VolleyHelper(getContext());
@@ -124,14 +88,14 @@ public class CarsFragment extends Fragment {
         data.put("customer",userName);
         helper.callApi("androidApi/getCars", data, new VolleyHelper.VolleyCallBack() {
             @Override
-            public void data(JSONObject data, String error) {
+            public void data(JSONObject data, String error) { //TODO: change function
                 dialog.dismiss();
                 if(data != null){
                     try {
                         JSONArray array = new JSONArray(data.getString("result"));
-                        carsArray.clear();
+                        transactions.clear();
                         for(int i =0;i<array.length();i++){
-                            carsArray.add(Car.fromJson(array.getJSONObject(i)));
+//                            transactions.add(Transactions.fromJson(array.getJSONObject(i)));
                         }
                         adapter.notifyDataSetChanged();
                     } catch (JSONException e) {
@@ -143,7 +107,7 @@ public class CarsFragment extends Fragment {
 
 
     }
-
-
-
+    
 }
+
+

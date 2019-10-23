@@ -119,8 +119,8 @@ public class MainActivity extends AppCompatActivity
             fragment=new CarsFragment();
         } else if (id == R.id.nav_premium) {
             fragment=new PremiumFragment();
-        } else if (id == R.id.nav_premium) {
-            fragment=new PremiumFragment();
+        } else if (id == R.id.nav_transactions) {
+            fragment=new TransactionFragment();
         } else if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
+// TODO: Remove this code and get a logout fuction
     //FIrebase AUthentication
 
     private void firebaseAuthenticate(){
