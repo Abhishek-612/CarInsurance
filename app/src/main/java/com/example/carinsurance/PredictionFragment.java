@@ -49,7 +49,7 @@ public class PredictionFragment extends Fragment {
     FloatingActionButton upload;
     Button capture;
     ImageView image;
-    Uri resultUri=null;
+    static Uri resultUri=null;
     private static final int REQUEST_IMAGE_CAPTURE=101;
 
     public PredictionFragment() {

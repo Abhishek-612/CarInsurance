@@ -7,6 +7,7 @@ public class Claims {
     boolean verfiedAt;
     String raisedAt,settledAt,location,severity;
     String price;
+    String time;
 
     public Claims(){
 
@@ -52,6 +53,10 @@ public class Claims {
         return severity;
     }
 
+    public String getTime() {
+        return time;
+    }
+
     private void settleClaim(){
 
     }
@@ -67,6 +72,7 @@ public class Claims {
             j = new JSONObject(j.getString("max"));
             String region = j.getString("maxResult");
             c.price = j.getString("cost");
+            c.time = j.getString("time");
             c.location = region.split("_")[0];
             c.severity = region.split("_")[1];
         }catch (Exception e){

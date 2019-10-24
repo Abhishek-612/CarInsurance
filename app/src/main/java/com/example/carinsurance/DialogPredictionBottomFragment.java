@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class DialogPredictionBottomFragment extends BottomSheetDialogFragment {
     Button request;
     View rootView;
     JSONObject data;
+    ImageView img;
 
     public static DialogPredictionBottomFragment newInstance() {
         return new DialogPredictionBottomFragment();
@@ -61,12 +63,9 @@ public class DialogPredictionBottomFragment extends BottomSheetDialogFragment {
         location=(TextView)rootView.findViewById(R.id.location);
         severity=(TextView)rootView.findViewById(R.id.sever);
         request=(Button)rootView.findViewById(R.id.raise);
+        img=(ImageView) rootView.findViewById(R.id.img);
 
-        try {
-            Toast.makeText(getContext(), data.getString("predictions"), Toast.LENGTH_SHORT).show();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
         Claims claims= null;
         try {
             claims = Claims.getJSON(data.getString("predictions"));
@@ -78,9 +77,10 @@ public class DialogPredictionBottomFragment extends BottomSheetDialogFragment {
             return;
         }
 
-        date.setText(claims.getRaisedAt());
+        date.setText(claims.getTime());
         cost.setText("₹ "+claims.getPrice());
         location.setText(claims.getLocation());
+        img.setImageURI(PredictionFragment.resultUri);
 //        if(claims.getLocation().equals("whole"))
 //            severity.setVisibility(View.GONE);
 //        else
