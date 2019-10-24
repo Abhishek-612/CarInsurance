@@ -21,9 +21,11 @@ import android.widget.Toast;
 
 import com.example.carinsurance.Models.Insurance;
 
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class InsuranceFragment extends Fragment {
@@ -64,13 +66,21 @@ public class InsuranceFragment extends Fragment {
         premium=(TextView)rootView.findViewById(R.id.prem);
         claim=(Button)rootView.findViewById(R.id.raise_claim);
 
-        //TODO: Insurance update values
-//        setInsurance()
+
+        VolleyHelper helper = new VolleyHelper(getContext());
+        HashMap<String,Object> dataJSON = new HashMap<>();
+        dataJSON.put("vehicle",CarsFragment.vehicleNum);
+        helper.callApi("androidApi/getInsurance", dataJSON, new VolleyHelper.VolleyCallBack() {
+            @Override
+            public void data(JSONObject data, String error) {
+
+            }
+        });
 
         claim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO:raiseClaim() for current Insurance details
+
                 new Insurance().raiseClaim((AppCompatActivity)getContext());
             }
         });

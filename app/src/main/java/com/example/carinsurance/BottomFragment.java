@@ -5,11 +5,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.carinsurance.Models.Car;
 
 public class BottomFragment extends BottomSheetDialogFragment {
 
@@ -35,10 +38,20 @@ public class BottomFragment extends BottomSheetDialogFragment {
 
     }
 
+    void getCarDetails(){
+        for(Car c:CarsFragment.carsArray){
+            if (c.getVehicleNum().equals(CarsFragment.vehicleNum)){
+                Log.d("username",c.getVehicleNum());
+                setCarDetails(c.getModel(),c.getModel(),c.getVehicleNum(),"DNIECV","BFEIUB",c.getPurchasedAt(),c.getClaims());
+                break;
+            }
+        }
+    }
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         company=(TextView)view.findViewById(R.id.company_name);
         model=(TextView)view.findViewById(R.id.car_name);
@@ -51,8 +64,7 @@ public class BottomFragment extends BottomSheetDialogFragment {
         insurance=(Button)view.findViewById(R.id.check);
 
 
-        //TODO: Get Car details
-        setCarDetails("Maruti","Swift","MH02CV7175","DNIECV","BFEIUB","21/1/99",0);
+        getCarDetails();
 
         insurance.setOnClickListener(new View.OnClickListener() {
             @Override

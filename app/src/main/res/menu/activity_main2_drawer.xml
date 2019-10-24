@@ -12,10 +12,10 @@
             android:id="@+id/nav_premium"
             android:icon="@drawable/ic_dollar_symbol"
             android:title="@string/menu_premium" />
-        <item
-            android:id="@+id/nav_transactions"
-            android:icon="@drawable/ic_icon"
-            android:title="@string/menu_profile" />
+<!--        <item-->
+<!--            android:id="@+id/nav_transactions"-->
+<!--            android:icon="@drawable/ic_icon"-->
+<!--            android:title="@string/menu_profile" />-->
 
     </group>
 

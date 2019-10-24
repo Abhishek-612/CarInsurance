@@ -6,13 +6,13 @@ public class Claims {
 
     boolean verfiedAt;
     String raisedAt,settledAt,location,severity;
-    double price;
+    String price;
 
     public Claims(){
 
     }
 
-    public Claims(boolean verfiedAt, String raisedAt, String settledAt, String location, String severity, double price) {
+    public Claims(boolean verfiedAt, String raisedAt, String settledAt, String location, String severity, String price) {
         this.verfiedAt = verfiedAt;
         this.raisedAt = raisedAt;
         this.settledAt = settledAt;
@@ -21,7 +21,7 @@ public class Claims {
         this.price = price;
     }
 
-    public Claims(String raisedAt, String location, String severity, double price) {
+    public Claims(String raisedAt, String location, String severity, String price) {
         this.raisedAt = raisedAt;
         this.location = location;
         this.severity = severity;
@@ -40,7 +40,7 @@ public class Claims {
         return settledAt;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
@@ -66,10 +66,13 @@ public class Claims {
             JSONObject j = new JSONObject(data);
             j = new JSONObject(j.getString("max"));
             String region = j.getString("maxResult");
-            c.price = j.getInt("cost");
+            c.price = j.getString("cost");
             c.location = region.split("_")[0];
             c.severity = region.split("_")[1];
-        }catch (Exception e){}
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
 
         return c;
     }

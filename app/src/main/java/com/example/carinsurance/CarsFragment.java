@@ -32,8 +32,8 @@ public class CarsFragment extends Fragment {
     View rootView;
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private static RecyclerView recyclerView;
-    private static ArrayList<Car> carsArray;
+    public static RecyclerView recyclerView;
+    public static ArrayList<Car> carsArray;
     static View.OnClickListener myOnClickListener;
     public static String vehicleNum;
 

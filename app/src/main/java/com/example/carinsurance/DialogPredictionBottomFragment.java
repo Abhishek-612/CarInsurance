@@ -68,6 +68,10 @@ public class DialogPredictionBottomFragment extends BottomSheetDialogFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        if(claims == null){
+            Toast.makeText(getContext(), "Error occurred", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         date.setText(claims.getRaisedAt());
         cost.setText("₹ "+claims.getPrice());
