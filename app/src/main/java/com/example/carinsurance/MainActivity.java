@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
 
 
         if(!getSharedPreferences("user",MODE_PRIVATE).contains("username")){
-//            startActivity(new Intent(this,LoginActivity.class));
+            startActivity(new Intent(this,LoginActivity.class));
         }
 
 

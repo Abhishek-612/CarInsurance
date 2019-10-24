@@ -23,7 +23,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Company"
+        android:hint="Username"
         android:text="userName"
         android:id="@+id/username"
         android:layout_marginLeft="60dp"
@@ -34,7 +34,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Model"
+        android:hint="Password"
         android:text="kds"
         android:id="@+id/password"
         android:layout_marginLeft="60dp"

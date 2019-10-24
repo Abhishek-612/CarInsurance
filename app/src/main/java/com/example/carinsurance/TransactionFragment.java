@@ -88,7 +88,7 @@ public class TransactionFragment extends Fragment {
         data.put("customer",userName);
         helper.callApi("androidApi/getCars", data, new VolleyHelper.VolleyCallBack() {
             @Override
-            public void data(JSONObject data, String error) { //TODO: change function
+            public void data(JSONObject data, String error) { //TOGDO: change function
                 dialog.dismiss();
                 if(data != null){
                     try {

@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(customer == null){
                             Toast.makeText(LoginActivity.this, "Error getting details", Toast.LENGTH_LONG).show();
                         }else{
-                            Toast.makeText(LoginActivity.this, "Welcome user "+customer.name, Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Welcome "+customer.name, Toast.LENGTH_LONG).show();
                             saveUser(customer);
                             finish();
                         }

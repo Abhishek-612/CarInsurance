@@ -31,7 +31,7 @@ public class Transactions {
         return premiumId;
     }
 
-    //TODO: functions need to be filled
+    //TOGDO: functions need to be filled
     private void refund() {
 
     }

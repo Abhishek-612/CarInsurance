@@ -62,6 +62,11 @@ public class DialogPredictionBottomFragment extends BottomSheetDialogFragment {
         severity=(TextView)rootView.findViewById(R.id.sever);
         request=(Button)rootView.findViewById(R.id.raise);
 
+        try {
+            Toast.makeText(getContext(), data.getString("predictions"), Toast.LENGTH_SHORT).show();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         Claims claims= null;
         try {
             claims = Claims.getJSON(data.getString("predictions"));
@@ -76,9 +81,9 @@ public class DialogPredictionBottomFragment extends BottomSheetDialogFragment {
         date.setText(claims.getRaisedAt());
         cost.setText("₹ "+claims.getPrice());
         location.setText(claims.getLocation());
-        if(claims.getLocation().equals("whole"))
-            severity.setVisibility(View.GONE);
-        else
+//        if(claims.getLocation().equals("whole"))
+//            severity.setVisibility(View.GONE);
+//        else
             severity.setText(claims.getSeverity());
 
         request.setOnClickListener(new View.OnClickListener() {
