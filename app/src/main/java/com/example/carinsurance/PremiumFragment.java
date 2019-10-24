@@ -1,6 +1,7 @@
 package com.example.carinsurance;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -21,7 +22,11 @@ import android.widget.Toast;
 
 import com.example.carinsurance.Models.Insurance;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -35,9 +40,32 @@ public class PremiumFragment extends Fragment {
     private static ArrayList<Insurance> data;
     static View.OnClickListener myPremiumOnClickListener;
     private static final int REQ_UPIPAYMENT = 54;
+    public static String vehicleNo = "MH47BT4226";
+    public static String amount = "5";
 
     public PremiumFragment() {
         // Required empty public constructor
+    }
+
+
+    void getInsuranceData(){
+        final ProgressDialog dialog = ProgressDialog.show(getContext(),"Please wait","Please wait while we fetch your details",true);
+        dialog.setCancelable(false);
+        Insurance i = new Insurance();
+        i.findInsurance(getContext(), vehicleNo, new VolleyHelper.VolleyCallBack() {
+            @Override
+            public void data(JSONObject dataJSON, String error) {
+                data.clear();
+                try {
+                    data.add(Insurance.getJSON(dataJSON.getJSONObject("insurance")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                adapter.notifyDataSetChanged();
+                dialog.dismiss();
+            }
+        });
+
     }
 
     private void launchUPI(String amount){
@@ -68,7 +96,24 @@ public class PremiumFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQ_UPIPAYMENT){
             if(resultCode == RESULT_OK){
+                Log.d("upi details",data.getStringExtra("response"));
                 Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                final ProgressDialog dialog = ProgressDialog.show(getContext(),"Sharing details with server","Please wat while we store this details on server",true);
+                dialog.setCancelable(false);
+                VolleyHelper helper = new VolleyHelper(getContext());
+                HashMap<String,Object> dataParams = new HashMap<>();
+                dataParams.put("vehicle",vehicleNo);
+                dataParams.put("amount",amount);
+                dataParams.put("transId",data.getStringExtra("response"));
+                dataParams.put("premiumId","5");
+                helper.callApi("androidApi/paymentDone", dataParams, new VolleyHelper.VolleyCallBack() {
+                    @Override
+                    public void data(JSONObject data, String error) {
+                        dialog.dismiss();
+                        Toast.makeText(getContext(), "Done", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 Log.d("data upi",data.toString());
             }else{
                 Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
@@ -91,6 +136,7 @@ public class PremiumFragment extends Fragment {
     }
 
     void viewSetter(){
+        getInsuranceData();
 //        myPremiumOnClickListener = new PremiumFragment.MyPremiumOnClickListener(getContext());
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.premium_recycler_view);
@@ -128,18 +174,6 @@ public class PremiumFragment extends Fragment {
 
         }
 
-//        private void removeItem(View v) {
-//            int selectedItemPosition = recyclerView.getChildPosition(v);
-//            RecyclerView.ViewHolder viewHolder
-//                    = recyclerView.findViewHolderForPosition(selectedItemPosition);
-//            TextView model
-//                    = (TextView) viewHolder.itemView.findViewById(R.id.carName);
-//            String selectedName = (String) model.getText();
-//            int selectedItemId = -1;
-//            removedItems.add(selectedItemId);
-//            data.remove(selectedItemPosition);
-//            adapter.notifyItemRemoved(selectedItemPosition);
-//        }
     }
 
 

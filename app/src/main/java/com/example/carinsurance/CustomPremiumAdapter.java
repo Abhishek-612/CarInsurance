@@ -41,11 +41,8 @@ public class CustomPremiumAdapter extends RecyclerView.Adapter<CustomPremiumAdap
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                          int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.premium_card_layout, parent, false);
-
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.premium_card_layout, parent, false);
         view.setOnClickListener(PremiumFragment.myPremiumOnClickListener);
-
         CustomPremiumAdapter.MyViewHolder myViewHolder = new CustomPremiumAdapter.MyViewHolder(view);
         return myViewHolder;
     }
@@ -61,7 +58,7 @@ public class CustomPremiumAdapter extends RecyclerView.Adapter<CustomPremiumAdap
         Button pay=holder.pay;
 
 
-        model.setText(CarsFragment.vehicleNum);
+        model.setText("Balance ₹ "+dataSet.get(listPosition).balance);
         premium.setText("₹ "+Double.toString(dataSet.get(listPosition).getPremium()));
         doi.setText(dataSet.get(listPosition).getBoughtAt());
 
