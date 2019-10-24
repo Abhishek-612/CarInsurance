@@ -1,5 +1,6 @@
 package com.example.carinsurance;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.carinsurance.Models.Insurance;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
@@ -70,9 +72,18 @@ public class InsuranceFragment extends Fragment {
         VolleyHelper helper = new VolleyHelper(getContext());
         HashMap<String,Object> dataJSON = new HashMap<>();
         dataJSON.put("vehicle",CarsFragment.vehicleNum);
+        final ProgressDialog dialog = ProgressDialog.show(getContext(),"Getting details","",true);
+        dialog.setCancelable(false);
         helper.callApi("androidApi/getInsurance", dataJSON, new VolleyHelper.VolleyCallBack() {
             @Override
             public void data(JSONObject data, String error) {
+                dialog.dismiss();
+                try {
+                    JSONObject insurance = data.getJSONObject("insurance");
+                    setInsurance(insurance.getDouble("premium"),insurance.getDouble("balance"),insurance.getString("boughtAt"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         });

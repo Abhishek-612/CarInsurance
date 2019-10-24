@@ -1,5 +1,6 @@
 package com.example.carinsurance;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -38,12 +39,14 @@ public class MainActivity extends AppCompatActivity
     private static final int REQUEST_CODE=7117;
     TextView mail,name;
     Fragment fragment;
+    public static Context c;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        c = MainActivity.this;
 
         providers = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.PhoneBuilder().build());
