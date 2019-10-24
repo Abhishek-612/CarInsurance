@@ -44,15 +44,11 @@ public class AuthBottomFragment extends BottomSheetDialogFragment {
 
 
         code=(EditText)view.findViewById(R.id.authID);
-
+        bd=getArguments();
         verify=(Button)view.findViewById(R.id.verify);
 
-        final String verify_id ="0";
 
-        //TODO: getIntent() not working
-//        Bundle extras = getIntent().getExtras();
-//        final String id = extras.getStringExtra("code");
-//        Bundle car = extras.getBundleExtra("car");
+        final long verifyCode=bd.getLong("code");
 
 
 
@@ -60,8 +56,8 @@ public class AuthBottomFragment extends BottomSheetDialogFragment {
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!code.getText().toString().equals(verify_id))
-                // TODO:Send car details to database
+                if(code.getText().toString().equals(verifyCode))
+                // TOGDO:Send car details to database
                 ((AppCompatActivity)getContext()).getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, new CarsFragment())

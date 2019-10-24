@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.example.carinsurance.Models.Car;
 import com.example.carinsurance.Models.Transactions;
+import com.google.android.gms.auth.api.Auth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,7 +47,7 @@ public class NewCarFragment extends Fragment {
     View rootView;
     EditText company,model,vnum,eno,cno,bought;
     Button button;
-    Intent i;
+    AuthBottomFragment i;
     Bundle car;
     long code;
 
@@ -81,7 +82,7 @@ public class NewCarFragment extends Fragment {
         cno = (EditText) rootView.findViewById(R.id.cno);
         bought = (EditText) rootView.findViewById(R.id.car_bought);
 
-        i=new Intent(getContext(),AuthBottomFragment.class);
+        i=new AuthBottomFragment();
 
         car=new Bundle();
         car.putString("company",company.getText().toString());
@@ -123,7 +124,7 @@ public class NewCarFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 code=(Math.round(Math.random()*1000000)+1);
-                i.putExtra("code", code);
+                car.putLong("code",code);
                 Intent email = new Intent(Intent.ACTION_SEND);
                 String receiver=getActivity().getSharedPreferences("user",MODE_PRIVATE).getString("username","DEFAULT");
                 String name=getActivity().getSharedPreferences("user",MODE_PRIVATE).getString("name","DEFAULT");
@@ -144,8 +145,7 @@ public class NewCarFragment extends Fragment {
         });
 
 
-        i.putExtra("car", car);
-        getContext().startActivity(i);
+        i.setArguments(car);
     }
 
     private void updateLabel() {
